@@ -3,7 +3,7 @@ import { StreamChat } from "stream-chat";
 
 const API_KEY = "mx3bf8x5sf2u";
 
-const chatClient = StreamChat.getInstance(API_KEY);
+export const chatClient = StreamChat.getInstance(API_KEY);
 
 export const connectUser = async () => {
   await chatClient.connectUser(
