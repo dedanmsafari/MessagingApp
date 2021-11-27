@@ -1,6 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { connectUser } from "./src/services/streamChat/streamClient";
+import {
+  connectUser,
+  chatClient,
+} from "./src/services/streamChat/streamClient";
 
 import { StyleSheet, Text, View } from "react-native";
 
@@ -9,7 +12,11 @@ const API_KEY = "mx3bf8x5sf2u";
 export default function App() {
   React.useEffect(() => {
     connectUser();
-    console.log("Connected");
+
+    return () => {
+      // cleanup
+      chatClient.disconnectUser();
+    };
   }, []);
 
   return (
