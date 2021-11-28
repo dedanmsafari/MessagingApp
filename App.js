@@ -14,7 +14,7 @@ export default function App() {
     connectUser();
 
     return () => {
-      // cleanup
+     
       chatClient.disconnectUser();
     };
   }, []);
