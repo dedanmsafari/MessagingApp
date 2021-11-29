@@ -1,37 +1,67 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import {
   connectUser,
   chatClient,
 } from "./src/services/streamChat/streamClient";
-
+import {
+  OverlayProvider,
+  Chat,
+  ChannelList,
+  Channel,
+  MessageList,
+  MessageInput,
+} from "stream-chat-expo";
 import { StyleSheet, Text, View } from "react-native";
 
-const API_KEY = "mx3bf8x5sf2u";
-
 export default function App() {
+  const [isReady, setIsReady] = useState(false);
+  const [selectedChannel, setSelectedChannel] = useState(null);
+
   React.useEffect(() => {
     connectUser();
-
+    setTimeout(() => {
+      setIsReady(true);
+    }, 2000);
     return () => {
-     
       chatClient.disconnectUser();
     };
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  const channelPress = (channel) => {
+    setSelectedChannel(channel);
+  };
+
+  if (!isReady) {
+    return null;
+  } else {
+    return (
+      <View style={styles.container}>
+        <OverlayProvider>
+          <Chat client={chatClient}>
+            {selectedChannel ? (
+              <Channel channel={selectedChannel}>
+                <MessageList />
+                <MessageInput />
+                <Text onPress={() => setSelectedChannel(null)}>
+                  {/* {selectedChannel.type} */}Go Back
+                </Text>
+              </Channel>
+            ) : (
+              <ChannelList onSelect={channelPress} />
+            )}
+          </Chat>
+        </OverlayProvider>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 40,
+    paddingLeft: 20,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
