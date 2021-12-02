@@ -8,11 +8,16 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo-google-fonts/fraunces": "^0.2.0",
+    "@expo-google-fonts/lato": "^0.2.0",
+    "@expo-google-fonts/permanent-marker": "^0.2.0",
     "@react-native-community/netinfo": "6.0.2",
     "expo": "~43.0.2",
+    "expo-app-loading": "~1.2.1",
     "expo-blur": "~10.0.3",
     "expo-document-picker": "~10.0.3",
     "expo-file-system": "~13.0.3",
+    "expo-font": "~10.0.3",
     "expo-haptics": "~11.0.3",
     "expo-image-manipulator": "~10.1.2",
     "expo-image-picker": "~11.0.3",
@@ -23,11 +28,13 @@
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
     "react-native-gesture-handler": "~1.10.2",
+    "react-native-paper": "^4.10.1",
     "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-svg": "12.1.1",
     "react-native-web": "0.17.1",
-    "stream-chat-expo": "^3.10.2"
+    "stream-chat-expo": "^3.10.2",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
