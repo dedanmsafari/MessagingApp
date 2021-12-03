@@ -37,8 +37,9 @@ font-weight: ${theme.fontWeights.regular};
 `;
 const fancy = (theme) => `
 font-family: ${theme.fonts.fancy};
-font-size: ${theme.fontSizes.body};
+font-size: ${theme.fontSizes.h2};
 font-weight: ${theme.fontWeights.regular};
+color:${theme.colors.brand.primary}
 `;
 
 const variants = {
@@ -54,8 +55,6 @@ export const Text = styled.Text`
   ${({ theme }) => defaultTextStyle(theme)}
   ${({ variant, theme }) => variants[variant](theme)}
 `;
-
-
 
 Text.defaultProps = {
   variant: "body",
