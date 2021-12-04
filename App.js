@@ -28,6 +28,7 @@ import { StyleSheet, View } from "react-native";
 import { theme } from "./src/infrastructure/theme";
 import { Text } from "./src/components/Text/text.component";
 import { Spacer } from "./src/components/Spacer/spacer.component";
+import { Navigation } from "./src/infrastructure/navigation";
 
 export default function App() {
   const [latoLoaded] = useLato({
@@ -67,31 +68,7 @@ export default function App() {
     return (
       <>
         <ThemeProvider theme={theme}>
-          <View style={styles.container}>
-            <OverlayProvider>
-              <Chat client={chatClient}>
-                {selectedChannel ? (
-                  <Channel channel={selectedChannel}>
-                    <MessageList />
-                    <MessageInput />
-                    <Text
-                      variant="caption"
-                      onPress={() => setSelectedChannel(null)}
-                    >
-                      {/* {selectedChannel.type} */}Go Back
-                    </Text>
-                  </Channel>
-                ) : (
-                  <>
-                    <Spacer>
-                      <Text variant="fancy">Please Select a channel</Text>
-                    </Spacer>
-                    <ChannelList onSelect={channelPress} />
-                  </>
-                )}
-              </Chat>
-            </OverlayProvider>
-          </View>
+        <Navigation/>
         </ThemeProvider>
         <ExpoStatusBar style="auto" />
       </>
@@ -107,3 +84,30 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
 });
+
+
+// <View style={styles.container}>
+//             <OverlayProvider>
+//               <Chat client={chatClient}>
+//                 {selectedChannel ? (
+//                   <Channel channel={selectedChannel}>
+//                     <MessageList />
+//                     <MessageInput />
+//                     <Text
+//                       variant="caption"
+//                       onPress={() => setSelectedChannel(null)}
+//                     >
+//                       {/* {selectedChannel.type} */}Go Back
+//                       </Text>
+//                       </Channel>
+//                     ) : (
+//                       <>
+//                         <Spacer>
+//                           <Text variant="fancy">Please Select a channel</Text>
+//                         </Spacer>
+//                         <ChannelList onSelect={channelPress} />
+//                       </>
+//                     )}
+//                   </Chat>
+//                 </OverlayProvider>
+//               </View>
