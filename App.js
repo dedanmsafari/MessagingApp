@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import AppLoading from "expo-app-loading";
-import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+import {
+  useFonts as useLato,
+  Lato_400Regular,
+  Lato_700Bold,
+} from "@expo-google-fonts/lato";
 import {
   useFonts as usePermanentMarker,
   PermanentMarker_400Regular,
@@ -10,6 +14,7 @@ import {
 import {
   useFonts as useFraunces,
   Fraunces_500Medium,
+  Fraunces_700Bold,
 } from "@expo-google-fonts/fraunces";
 
 import {
@@ -33,12 +38,14 @@ import { Navigation } from "./src/infrastructure/navigation";
 export default function App() {
   const [latoLoaded] = useLato({
     Lato_400Regular,
+    Lato_700Bold,
   });
   const [permanentMarkerLoaded] = usePermanentMarker({
     PermanentMarker_400Regular,
   });
   const [frauncesLoaded] = useFraunces({
     Fraunces_500Medium,
+    Fraunces_700Bold,
   });
 
   const [isReady, setIsReady] = useState(false);
@@ -68,7 +75,7 @@ export default function App() {
     return (
       <>
         <ThemeProvider theme={theme}>
-        <Navigation/>
+          <Navigation />
         </ThemeProvider>
         <ExpoStatusBar style="auto" />
       </>
@@ -84,7 +91,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
 });
-
 
 // <View style={styles.container}>
 //             <OverlayProvider>
