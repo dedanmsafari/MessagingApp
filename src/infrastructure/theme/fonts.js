@@ -1,6 +1,9 @@
 export const fonts = {
   body: "Lato_400Regular", //Regular and Bold only
+  bodyBold: "Lato_700Bold",
+  
   heading: "Fraunces_500Medium", // All Available
+  headingBold: "Fraunces_700Bold",
   fancy: "PermanentMarker_400Regular", //Regular Only!
 };
 
