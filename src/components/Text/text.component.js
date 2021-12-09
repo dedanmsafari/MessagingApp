@@ -32,7 +32,6 @@ font-weight: ${theme.fontWeights.bold};
 const title = (theme) => `
 font-size: ${theme.fontSizes.h4};
 font-family: ${theme.fonts.bodyBold};
-
 `;
 
 const label = (theme) => `
