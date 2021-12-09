@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   AccountBackground,
   AccountCover,
   FormInput,
   AuthButton,
+  ErrorContainer,
 } from "../components/account.styles";
 import { Spacer } from "../../../components/Spacer/spacer.component";
 import { Text } from "../../../components/Text/text.component";
+import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+import { LoadingIndicator } from "../../../components/ActivityIndicator/loadingIndicator.component";
 
 export const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+
+  const { register, isLoading, error } = useContext(AuthenticationContext);
+
   return (
     <AccountBackground>
       <AccountCover />
@@ -47,6 +53,23 @@ export const RegisterScreen = ({ navigation }) => {
         secureTextEntry
         onChangeText={(repeatPassword) => setRepeatPassword(repeatPassword)}
       />
+      {error && (
+        <ErrorContainer>
+          <Text variant="error">{error}</Text>
+        </ErrorContainer>
+      )}
+      <Spacer size="large" />
+      {!isLoading ? (
+        <AuthButton
+          icon="email"
+          mode="contained"
+          onPress={() => register(email, password, repeatPassword)}
+        >
+          Register
+        </AuthButton>
+      ) : (
+        <LoadingIndicator />
+      )}
       <Spacer size="large" />
       <AuthButton mode="contained" onPress={() => navigation.goBack()}>
         Back
