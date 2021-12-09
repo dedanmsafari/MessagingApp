@@ -23,7 +23,7 @@ export const AuthButton = styled(Button).attrs({
   color: colors.brand.tertiary,
 })`
   padding: ${(props) => props.theme.space[2]};
-  width: 80%;
+  width: 300px;
 `;
 
 export const FormInput = styled(TextInput).attrs({
