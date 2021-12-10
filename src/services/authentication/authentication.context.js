@@ -8,12 +8,21 @@ export const AuthenticationContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
 
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      setUser(user);
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+    }
+  });
+
   const login = async (email, password) => {
     setIsLoading(true);
     setError(null);
     try {
       const response = await loginRequest(email, password);
-      setUser(response.user);
+      setUser(response);
       setIsLoading(false);
     } catch (error) {
       setError(error.toString());
@@ -46,7 +55,7 @@ export const AuthenticationContextProvider = ({ children }) => {
       const response = await firebase
         .auth()
         .createUserWithEmailAndPassword(email, password);
-      setUser(response.user);
+      setUser(response);
       setIsLoading(false);
     } catch (error) {
       setError(error.toString());
