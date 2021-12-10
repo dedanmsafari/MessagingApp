@@ -1,24 +1,25 @@
 import { StreamChat } from "stream-chat";
 
+
 const API_KEY = "mx3bf8x5sf2u";
 
 export const chatClient = StreamChat.getInstance(API_KEY);
 
-export const connectUser = async () => {
+export const connectUser = async (user) => {
   //Connecting a User
   await chatClient.connectUser(
     {
-      id: "dedan_eleven",
-      name: "Dedan",
+      id: user.uid,
+      name: user.email,
       image: "https://cdn.streamlabs.com/slobs/user-1.png",
     },
-    chatClient.devToken("dedan_eleven")
+    chatClient.devToken(user.uid)
   );
 
   //Creating a Channel
 
-  const channel = chatClient.channel("messaging", "Nairobi", {
-    name: "Nairobi",
+  const channel = chatClient.channel("messaging", "Kisumu", {
+    name: "Kisumu",
   });
 
   await channel.watch();
