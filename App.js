@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ThemeProvider } from "styled-components";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import AppLoading from "expo-app-loading";
@@ -17,23 +17,29 @@ import {
   Fraunces_700Bold,
 } from "@expo-google-fonts/fraunces";
 
-import {
-  connectUser,
-  chatClient,
-} from "./src/services/streamChat/streamClient";
-import {
-  OverlayProvider,
-  Chat,
-  ChannelList,
-  Channel,
-  MessageList,
-  MessageInput,
-} from "stream-chat-expo";
-import { StyleSheet, View } from "react-native";
 import { theme } from "./src/infrastructure/theme";
-import { Text } from "./src/components/Text/text.component";
-import { Spacer } from "./src/components/Spacer/spacer.component";
 import { Navigation } from "./src/infrastructure/navigation";
+import * as firebase from "firebase";
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC4juBR04cHs4EKTWeeGF54WrXS8vdoJUA",
+  authDomain: "stretch-ebb6e.firebaseapp.com",
+  projectId: "stretch-ebb6e",
+  storageBucket: "stretch-ebb6e.appspot.com",
+  messagingSenderId: "813177374019",
+  appId: "1:813177374019:web:6b8dfbe1715998d9289bf6",
+  measurementId: "${config.measurementId}",
+};
+
+// const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export default function App() {
   const [latoLoaded] = useLato({
@@ -48,72 +54,20 @@ export default function App() {
     Fraunces_700Bold,
   });
 
-  const [isReady, setIsReady] = useState(false);
-  const [selectedChannel, setSelectedChannel] = useState(null);
-
-  React.useEffect(() => {
-    connectUser();
-    setTimeout(() => {
-      setIsReady(true);
-    }, 2000);
-    return () => {
-      chatClient.disconnectUser();
-    };
-  }, []);
-
-  const channelPress = (channel) => {
-    setSelectedChannel(channel);
-  };
-
   if (!latoLoaded || !permanentMarkerLoaded || !frauncesLoaded) {
     return <AppLoading />;
   }
 
-  if (!isReady) {
-    return null;
-  } else {
     return (
       <>
         <ThemeProvider theme={theme}>
-          <Navigation />
+          <AuthenticationContextProvider>
+            <Navigation />
+          </AuthenticationContextProvider>
         </ThemeProvider>
         <ExpoStatusBar style="auto" />
       </>
     );
   }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 40,
-    paddingLeft: 20,
-    backgroundColor: "#fff",
-  },
-});
 
-// <View style={styles.container}>
-//             <OverlayProvider>
-//               <Chat client={chatClient}>
-//                 {selectedChannel ? (
-//                   <Channel channel={selectedChannel}>
-//                     <MessageList />
-//                     <MessageInput />
-//                     <Text
-//                       variant="caption"
-//                       onPress={() => setSelectedChannel(null)}
-//                     >
-//                       {/* {selectedChannel.type} */}Go Back
-//                       </Text>
-//                       </Channel>
-//                     ) : (
-//                       <>
-//                         <Spacer>
-//                           <Text variant="fancy">Please Select a channel</Text>
-//                         </Spacer>
-//                         <ChannelList onSelect={channelPress} />
-//                       </>
-//                     )}
-//                   </Chat>
-//                 </OverlayProvider>
-//               </View>
