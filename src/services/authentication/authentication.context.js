@@ -8,17 +8,13 @@ export const AuthenticationContextProvider = ({ children }) => {
   const [user, setUser] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
-  const [isReady, setIsReady] = React.useState(false);
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       setUser(user);
-      connectUser(user);
       setIsLoading(false);
-      setIsReady(true);
     } else {
       setIsLoading(false);
-      setIsReady(false);
     }
   });
 
@@ -28,13 +24,10 @@ export const AuthenticationContextProvider = ({ children }) => {
     try {
       const response = await loginRequest(email, password);
       setUser(response);
-      connectUser(user);
       setIsLoading(false);
-      setIsReady(true);
     } catch (error) {
       setError(error.toString());
       setIsLoading(false);
-      setIsReady(false);
     }
   };
 
@@ -64,13 +57,10 @@ export const AuthenticationContextProvider = ({ children }) => {
         .auth()
         .createUserWithEmailAndPassword(email, password);
       setUser(response);
-      connectUser(user);
       setIsLoading(false);
-      setIsReady(true);
     } catch (error) {
       setError(error.toString());
       setIsLoading(false);
-      setIsReady(false);
     }
   };
   return (
@@ -82,7 +72,6 @@ export const AuthenticationContextProvider = ({ children }) => {
         logout,
         register,
         isLoading,
-        isReady,
         error,
       }}
     >
