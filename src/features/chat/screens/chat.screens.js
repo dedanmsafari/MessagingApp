@@ -16,21 +16,20 @@ import { AuthenticationContext } from "../../../services/authentication/authenti
 import { LoadingIndicator } from "../../../components/ActivityIndicator/loadingIndicator.component";
 
 export const ChatScreen = () => {
-  const { user } = useContext(AuthenticationContext);
+  const { user, isReady } = useContext(AuthenticationContext);
 
-  const [isReady, setIsReady] = useState(false);
+  // const [isReady, setIsReady] = useState(false);
   const [selectedChannel, setSelectedChannel] = useState(null);
 
   React.useEffect(() => {
-    connectUser(user);
-    setTimeout(() => {
-      setIsReady(true);
-    }, 2000);
+    // connectUser(user);
+    // setTimeout(() => {
+    //   setIsReady(true);
+    // }, 2000);
 
     return () => {
       chatClient.disconnectUser(user);
     };
-    
   }, []);
 
   const channelPress = (channel) => {
