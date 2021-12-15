@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useEffect } from "react";
 import { loginRequest } from "./authentication.service";
 import { connectUser } from "../streamChat/streamClient";
 import * as firebase from "firebase";
@@ -8,6 +8,7 @@ export const AuthenticationContextProvider = ({ children }) => {
   const [user, setUser] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
+
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
