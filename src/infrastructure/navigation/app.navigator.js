@@ -6,7 +6,7 @@ import { colors } from "../theme/colors";
 import { ChatScreen } from "../../features/chat/screens/chat.screens";
 import { SettingsScreen } from "../../features/settings/screens/settings.screens";
 import { SafeArea } from "../../utils/safeArea.util.component";
-
+import { StreamChatProvider } from "../../services/streamChat/streamClient.context";
 const Tab = createBottomTabNavigator();
 
 const TAB_ICONS = {
@@ -28,15 +28,17 @@ const createScreenOptions = ({ route }) => {
 
 export const AppNavigator = () => {
   return (
-    <SafeArea>
-      <Tab.Navigator screenOptions={createScreenOptions}>
-        <Tab.Screen
-          name="Chats"
-          component={ChatScreen}
-          options={{ tabBarBadge: 3 }}
-        />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
-    </SafeArea>
+    <StreamChatProvider>
+      <SafeArea>
+        <Tab.Navigator screenOptions={createScreenOptions}>
+          <Tab.Screen
+            name="Chats"
+            component={ChatScreen}
+            options={{ tabBarBadge: 3 }}
+          />
+          <Tab.Screen name="Settings" component={SettingsScreen} />
+        </Tab.Navigator>
+      </SafeArea>
+    </StreamChatProvider>
   );
 };
