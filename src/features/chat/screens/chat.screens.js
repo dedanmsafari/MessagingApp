@@ -14,23 +14,12 @@ import {
 } from "stream-chat-expo";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { LoadingIndicator } from "../../../components/ActivityIndicator/loadingIndicator.component";
+import { StreamChatContext } from "../../../services/streamChat/streamClient.context";
 
 export const ChatScreen = () => {
   const { user } = useContext(AuthenticationContext);
-
-   const [isReady, setIsReady] = useState(false);
+  const { isReady } = useContext(StreamChatContext);
   const [selectedChannel, setSelectedChannel] = useState(null);
-
-  React.useEffect(() => {
-    connectUser(user);
-    setTimeout(() => {
-      setIsReady(true);
-    }, 2000);
-
-    return () => {
-      chatClient.disconnectUser(user);
-    };
-  }, []);
 
   const channelPress = (channel) => {
     setSelectedChannel(channel);
