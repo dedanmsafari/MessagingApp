@@ -18,8 +18,8 @@ export const connectUser = async (user) => {
 
   //Creating a Channel
 
-  const channel = chatClient.channel("messaging", "Kisumu", {
-    name: "Kisumu",
+  const channel = chatClient.channel("messaging", "Nairobi", {
+    name: "Nairobi",
   });
 
   await channel.watch();
