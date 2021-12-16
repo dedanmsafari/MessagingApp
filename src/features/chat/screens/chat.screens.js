@@ -1,10 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Text } from "../../../components/Text/text.component";
 import {
-  connectUser,
-  chatClient,
-} from "../../../services/streamChat/streamClient";
-import {
   OverlayProvider,
   Chat,
   ChannelList,
@@ -12,12 +8,10 @@ import {
   MessageList,
   MessageInput,
 } from "stream-chat-expo";
-import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { LoadingIndicator } from "../../../components/ActivityIndicator/loadingIndicator.component";
 import { StreamChatContext } from "../../../services/streamChat/streamClient.context";
 
 export const ChatScreen = () => {
-  const { user } = useContext(AuthenticationContext);
   const { isReady } = useContext(StreamChatContext);
   const [selectedChannel, setSelectedChannel] = useState(null);
 
