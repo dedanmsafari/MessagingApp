@@ -8,6 +8,7 @@ import {
   MessageList,
   MessageInput,
 } from "stream-chat-expo";
+import { chatClient } from "../../../services/streamChat/streamClient";
 import { LoadingIndicator } from "../../../components/ActivityIndicator/loadingIndicator.component";
 import { StreamChatContext } from "../../../services/streamChat/streamClient.context";
 
