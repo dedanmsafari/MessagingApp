@@ -30,7 +30,7 @@ export const ChatScreen = () => {
             <Channel channel={selectedChannel}>
               <MessageList />
               <Text variant="caption" onPress={() => setSelectedChannel(null)}>
-                {/* {selectedChannel.type} */}Go Back
+             Go Back
               </Text>
               <MessageInput />
             </Channel>
