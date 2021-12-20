@@ -6,7 +6,7 @@ const API_KEY = "mx3bf8x5sf2u";
 export const chatClient = StreamChat.getInstance(API_KEY);
 
 export const connectUser = async (user) => {
-  //Connecting a User
+
   await chatClient.connectUser(
     {
       id: user.uid,
@@ -16,7 +16,7 @@ export const connectUser = async (user) => {
     chatClient.devToken(user.uid)
   );
 
-  //Creating a Channel
+
 
   const channel = chatClient.channel("messaging", "Nairobi", {
     name: "Nairobi",
