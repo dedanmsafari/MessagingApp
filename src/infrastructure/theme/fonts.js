@@ -1,7 +1,7 @@
 export const fonts = {
   body: "Lato_400Regular", //Regular and Bold only
   bodyBold: "Lato_700Bold",
-  
+
   heading: "Fraunces_500Medium", // All Available
   headingBold: "Fraunces_700Bold",
   fancy: "PermanentMarker_400Regular", //Regular Only!
@@ -15,6 +15,7 @@ export const fontWeights = {
 
 // headers increasing by 2 and 4.
 export const fontSizes = {
+  small: "6px",
   caption: "12px",
   button: "14px",
   body: "16px",
