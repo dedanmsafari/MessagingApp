@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Text } from "../../../components/Text/text.component";
 import {
   OverlayProvider,
@@ -14,6 +14,7 @@ import { StreamChatContext } from "../../../services/streamChat/streamClient.con
 
 export const ChatScreen = () => {
   const { isReady } = useContext(StreamChatContext);
+
   const [selectedChannel, setSelectedChannel] = useState(null);
 
   const channelPress = (channel) => {
@@ -30,7 +31,7 @@ export const ChatScreen = () => {
             <Channel channel={selectedChannel}>
               <MessageList />
               <Text variant="caption" onPress={() => setSelectedChannel(null)}>
-             Go Back
+                Go Back
               </Text>
               <MessageInput />
             </Channel>
