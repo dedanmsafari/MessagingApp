@@ -3,15 +3,17 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../theme/colors";
-import { ChatScreen } from "../../features/chat/screens/chat.screens";
-import { SettingsScreen } from "../../features/settings/screens/settings.screens";
+import { ChatNavigator } from "./chat.navigator";
+import { UsersScreen } from "../../features/settings/screens/users.screens";
 import { SafeArea } from "../../utils/safeArea.util.component";
 import { StreamChatProvider } from "../../services/streamChat/streamClient.context";
+import { chatClient } from "../../services/streamChat/streamClient";
+import { OverlayProvider, Chat } from "stream-chat-expo";
 const Tab = createBottomTabNavigator();
 
 const TAB_ICONS = {
   Chats: "chatbubbles",
-  Settings: "settings-outline",
+  Users: "people",
 };
 
 const createScreenOptions = ({ route }) => {
@@ -22,23 +24,27 @@ const createScreenOptions = ({ route }) => {
     ),
     tabBarActiveTintColor: colors.brand.primary,
     tabBarInactiveTintColor: colors.brand.muted,
-    headerShown: false,
+    headerShown: true,
   };
 };
 
 export const AppNavigator = () => {
   return (
-    <StreamChatProvider>
-      <SafeArea>
-        <Tab.Navigator screenOptions={createScreenOptions}>
-          <Tab.Screen
-            name="Chats"
-            component={ChatScreen}
-            options={{ tabBarBadge: 3 }}
-          />
-          <Tab.Screen name="Settings" component={SettingsScreen} />
-        </Tab.Navigator>
-      </SafeArea>
-    </StreamChatProvider>
+    <SafeArea>
+      <StreamChatProvider>
+        <OverlayProvider>
+          <Chat client={chatClient}>
+            <Tab.Navigator screenOptions={createScreenOptions}>
+              <Tab.Screen
+                name="Chats"
+                component={ChatNavigator}
+                options={{ tabBarBadge: 3 }}
+              />
+              <Tab.Screen name="Users" component={UsersScreen} />
+            </Tab.Navigator>
+          </Chat>
+        </OverlayProvider>
+      </StreamChatProvider>
+    </SafeArea>
   );
 };
