@@ -9,14 +9,14 @@ export const connectUser = async (user) => {
     {
       id: user.uid,
       name: user.email,
-      image: "https://cdn.streamlabs.com/slobs/user-1.png",
+      image: "https://picsum.photos/200/300",
     },
     chatClient.devToken(user.uid)
   );
 
-  const channel = chatClient.channel("messaging", "Dan", {
-    name: "Dan",
-  });
+  // const channel = chatClient.channel("messaging", "Dan", {
+  //   name: "Dan",
+  // });
 
-  await channel.watch();
+  // await channel.watch();
 };
