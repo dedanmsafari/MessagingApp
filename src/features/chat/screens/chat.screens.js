@@ -1,45 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Text } from "../../../components/Text/text.component";
-import {
-  OverlayProvider,
-  Chat,
-  ChannelList,
-  Channel,
-  MessageList,
-  MessageInput,
-} from "stream-chat-expo";
-import { chatClient } from "../../../services/streamChat/streamClient";
+import React, { useContext } from "react";
+import { ChannelList } from "stream-chat-expo";
 import { LoadingIndicator } from "../../../components/ActivityIndicator/loadingIndicator.component";
 import { StreamChatContext } from "../../../services/streamChat/streamClient.context";
 
-export const ChatScreen = () => {
+export const ChatScreen = ({ navigation }) => {
   const { isReady } = useContext(StreamChatContext);
 
-  const [selectedChannel, setSelectedChannel] = useState(null);
-
   const channelPress = (channel) => {
-    setSelectedChannel(channel);
+    navigation.navigate("PrivateMessages", { channel });
   };
-
+  const filters = {
+    members: { $in: ["YNLI3j2rZRfdn4NAdN5WOTZ82Dt1"] },
+  };
   if (!isReady) {
     return <LoadingIndicator />;
   } else {
-    return (
-      <OverlayProvider>
-        <Chat client={chatClient}>
-          {selectedChannel ? (
-            <Channel channel={selectedChannel}>
-              <MessageList />
-              <Text variant="caption" onPress={() => setSelectedChannel(null)}>
-                Go Back
-              </Text>
-              <MessageInput />
-            </Channel>
-          ) : (
-            <ChannelList onSelect={channelPress} />
-          )}
-        </Chat>
-      </OverlayProvider>
-    );
+    return <ChannelList onSelect={channelPress} filters={filters} />;
   }
 };
