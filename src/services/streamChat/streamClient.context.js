@@ -8,9 +8,16 @@ export const StreamChatProvider = ({ children }) => {
   const [isReady, setIsReady] = React.useState(false);
 
   useEffect(() => {
-    connectUser(user);
-    setTimeout(() => setIsReady(true), 3000);
+    //Async call to connect user
 
+    (async () => {
+      await connectUser(user);
+    })();
+
+    //setting isReady to true
+    setIsReady(true);
+
+    //clean up
     return () => {
       chatClient.disconnectUser(user);
     };
