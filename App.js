@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import AppLoading from "expo-app-loading";
@@ -19,6 +19,7 @@ import {
 
 import { theme } from "./src/infrastructure/theme";
 import { Navigation } from "./src/infrastructure/navigation";
+import messaging from "@react-native-firebase/messaging";
 import * as firebase from "firebase";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 // import { initializeApp } from "firebase/app";
@@ -42,6 +43,25 @@ if (!firebase.apps.length) {
 }
 
 export default function App() {
+  const requestPermission = async () => {
+    const authStatus = await messaging().requestPermission();
+    const enabled =
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+    if (enabled) {
+      console.log("Authorization status:", authStatus);
+    }
+
+    const token = await messaging().getToken();
+
+    console.log("token", token);
+  };
+
+  useEffect(() => {
+    requestPermission();
+  }, []);
+
   const [latoLoaded] = useLato({
     Lato_400Regular,
     Lato_700Bold,
@@ -58,16 +78,14 @@ export default function App() {
     return <AppLoading />;
   }
 
-    return (
-      <>
-        <ThemeProvider theme={theme}>
-          <AuthenticationContextProvider>
-            <Navigation />
-          </AuthenticationContextProvider>
-        </ThemeProvider>
-        <ExpoStatusBar style="auto" />
-      </>
-    );
-  }
-
-
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <AuthenticationContextProvider>
+          <Navigation />
+        </AuthenticationContextProvider>
+      </ThemeProvider>
+      <ExpoStatusBar style="auto" />
+    </>
+  );
+}
