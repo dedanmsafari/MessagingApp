@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "813177374019",
+    "project_id": "stretch-ebb6e",
+    "storage_bucket": "stretch-ebb6e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813177374019:android:27a8a6abf1d74798289bf6",
+        "android_client_info": {
+          "package_name": "com.limitededition.stretch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "813177374019-555jev0nkq19ksh3t9nc783c2f44endq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0hecbIOt25P-AFzxhxINrmLXaknZk3l8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "813177374019-555jev0nkq19ksh3t9nc783c2f44endq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
